@@ -1,11 +1,39 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, {Component, useState} from 'react';
+import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
 
 export default function App() {
+
+  const [weather, setWeather] = useState(null);
+
+  let weatherInfo = null
+
+  let url = "https://api.openweathermap.org/data/2.5/onecall";
+  let key = "04349a836d896795eec0b6fc3941dac9";
+  let lat = "32.2226";
+  let lon = "-110.9747";
+
+  const dataFromAPI = async () => {
+    try {
+      const response = await fetch(`${url}?lat=${lat}?lon=${lon}?apiid=${key}`);
+      const data = await response.json();
+      console.log(data);
+      setWeather(data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  if(weather) {
+    weatherInfo = JSON.stringify(weather);
+  }
+
   return (
     <View style={styles.container}>
       <Text>Open up App.js to start working on your app!</Text>
+      <Button onPress={dataFromAPI} title="Tester Button"/>
+      <Text>Stuff will show up here</Text>
+      <Text>{weatherInfo}</Text>
       <StatusBar style="auto" />
     </View>
   );
