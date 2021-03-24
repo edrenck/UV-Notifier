@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React, {Component, useState} from 'react';
+import React, {useState} from 'react';
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
 
 export default function App() {
@@ -8,14 +8,14 @@ export default function App() {
 
   let weatherInfo = null
 
-  let url = "https://api.openweathermap.org/data/2.5/onecall";
-  let key = "04349a836d896795eec0b6fc3941dac9";
+  let url = "https://pro.openweathermap.org/data/2.5/onecall";
   let lat = "32.2226";
   let lon = "-110.9747";
 
   const dataFromAPI = async () => {
     try {
-      const response = await fetch(`${url}?lat=${lat}?lon=${lon}?apiid=${key}`);
+      console.log(`${url}?lat=${lat}?lon=${lon}?apiid=${key}`);
+      const response = await fetch(`${url}?lat=${lat}?lon=${lon}?appid=${key}`);
       const data = await response.json();
       console.log(data);
       setWeather(data);
