@@ -14,8 +14,7 @@ export default function App() {
 
   const dataFromAPI = async () => {
     try {
-      console.log(`${url}?lat=${lat}?lon=${lon}?apiid=${key}`);
-      const response = await fetch(`${url}?lat=${lat}?lon=${lon}?appid=${key}`);
+      const response = await fetch(`${url}?lat=${lat}&lon=${lon}&appid=${key}`);
       const data = await response.json();
       console.log(data);
       setWeather(data);
